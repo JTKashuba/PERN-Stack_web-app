@@ -65,6 +65,6 @@ SELECT * FROM restaurants;
 -- now useless entries like this will throw errors and not be added to the table
 INSERT INTO restaurants (location, price_range) values ('denver', 3);
 
-
+now that the basic Express JS server configuration is finished, next step is start building out the API
 
 
