@@ -2,18 +2,43 @@
 
 require('dotenv').config()
 const express = require("express");
+const morgan = require('morgan');
 
 const app = express();
 
-// anytime we get a "get" method from the front-end towards this 
-// exact URL "http://localhost:3001/getRestaurants", it's going to hit this route in the back-end
-app.get("/getRestaurants", (req, res) => {
+
+app.use((req, res, next) => {
+    console.log("this is an example of custom middleware");
+    next();
+});
+
+// example of middleware package "morgan", HTTP request logger middleware for node.js
+app.use(morgan("dev"));
+
+// the callback function "(req, res) => {};"" is referred to as a route handler
+// the route handler gets access to the request object and the response object
+
+// Get All Restaurants
+app.get("/api/v1/restaurants", (req, res) => {
+    console.log("route handler ran");
     // could assign HTTP status with the following syntax
-    //res.status(404).json({
+    //res.status(200).json({
     res.json({
         status: "success",
-        restaurant: "mcdonalds"
-    })
+        data: {
+            restaurant: ["mcdonalds", "wendys"]   
+        }
+    });
+});
+
+// Get One Restaurant
+app.get("/api/v1/restaurants/:id", (req, res) => {
+    console.log(req.params);
+});
+
+// Create Restaurant
+app.post("/api/v1/restaurants", (req, res) => {
+    console.log(req)
 });
 
 
