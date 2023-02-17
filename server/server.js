@@ -6,24 +6,33 @@ const morgan = require('morgan');
 
 const app = express();
 
+// JSON middleware
+app.use(express.json())
 
-app.use((req, res, next) => {
-    console.log("this is an example of custom middleware");
-    next();
+// CRUD Operations ///////////////////////////////////////////////
+/*
+Create
+*/
+
+// Create Restaurant
+app.post("/api/v1/restaurants", (req, res) => {
+    console.log(req.body);
+    res.status(201).json({
+        status: "success",
+        data: {
+            restaurant: "mcdonalds"
+        }
+    });
 });
 
-// example of middleware package "morgan", HTTP request logger middleware for node.js
-app.use(morgan("dev"));
-
-// the callback function "(req, res) => {};"" is referred to as a route handler
-// the route handler gets access to the request object and the response object
+/*
+Read 
+*/
 
 // Get All Restaurants
 app.get("/api/v1/restaurants", (req, res) => {
     console.log("route handler ran");
-    // could assign HTTP status with the following syntax
-    //res.status(200).json({
-    res.json({
+    res.status(200).json({
         status: "success",
         data: {
             restaurant: ["mcdonalds", "wendys"]   
@@ -34,13 +43,41 @@ app.get("/api/v1/restaurants", (req, res) => {
 // Get One Restaurant
 app.get("/api/v1/restaurants/:id", (req, res) => {
     console.log(req.params);
+    res.status(200).json({
+        status: "success",
+        data: {
+            restaurant: "mcdonalds"
+        }
+    });
 });
 
-// Create Restaurant
-app.post("/api/v1/restaurants", (req, res) => {
-    console.log(req)
+/* 
+Update 
+*/
+
+// Update Restaurant
+app.put("/api/v1/restaurants/:id", (req, res) => {
+    console.log(req.params.id);
+    console.log(req.body);
+    res.status(200).json({
+        status: "success",
+        data: {
+            restaurant: "mcdonalds"
+        }
+    });
 });
 
+
+/* 
+Delete 
+*/
+
+// Delete Restaurant
+app.delete("/api/v1/restaurants/:id", (req, res) => {
+    res.status(204).json({
+        status: "success"
+    });
+})
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
