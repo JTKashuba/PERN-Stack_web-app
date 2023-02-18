@@ -4,15 +4,9 @@ import Home from "./routes/Home";
 import RestaurantDetailPage from './routes/RestaurantDetailPage';
 import UpdatePage from './routes/UpdatePage';
 
-
 const App = () => {
-    return <div>
+    return <div className="container"> {/* added className="container" Bootstrap layout */}
         <Router>
-            {/*
-                best practice to wrap this with a <Routes> statement
-                so that when a <Route> is matched, it will tell react-router
-                to stop looking down the list of the different routes
-            */}
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/restaurants/:id/update" element={<UpdatePage/>}/>

@@ -1,14 +1,14 @@
-/*
-    Visual Studio Code extension "ES7+ React/Redux/React-Native snippets" commands:
-        rafce + [Tab] => reactArrowFunctionExportComponent
-*/
-
 import React from 'react'
+import AddRestaurant from '../components/AddRestaurant'
+import Header from '../components/Header'
+import RestaurantList from '../components/RestaurantList'
 
 const Home = () => {
   return (
     <div>
-        Home
+        <Header />
+        <AddRestaurant />
+        <RestaurantList />
     </div>
   )
 }
