@@ -3,7 +3,6 @@ import React from 'react'
 const RestaurantList = () => {
   return (
     <div className="list-group">
-        {/* https://getbootstrap.com/docs/5.3/content/tables/ */}
         <table className="table table-hover table-dark">
             <thead>
                 <tr className="bg-primary">
