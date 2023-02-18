@@ -1,12 +1,25 @@
-/*
-    Visual Studio Code extension "ES7+ React/Redux/React-Native snippets" commands:
-        imr + [Tab] => import React from 'react'
-*/
-
 import React from 'react'
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import Home from "./routes/Home";
+import RestaurantDetailPage from './routes/RestaurantDetailPage';
+import UpdatePage from './routes/UpdatePage';
+
 
 const App = () => {
-    return <div>App</div>
+    return <div>
+        <Router>
+            {/*
+                best practice to wrap this with a <Routes> statement
+                so that when a <Route> is matched, it will tell react-router
+                to stop looking down the list of the different routes
+            */}
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/restaurants/:id/update" element={<UpdatePage/>}/>
+                <Route path="/restaurants/:id" element={<RestaurantDetailPage/>}/>
+            </Routes>
+        </Router>
+    </div>
 }
 
 export default App;
