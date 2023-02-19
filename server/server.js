@@ -1,14 +1,20 @@
 // server.js is the entry-point into the back-end application
 
-require('dotenv').config()
+require('dotenv').config();
 const express = require("express");
-const db = require('./db')
+const cors = require("cors");
+const db = require('./db');
 const morgan = require('morgan');
 
 const app = express();
 
+// CORS middleware allows app to communicate between back- and front-end
+// Without it, the Express server will only accept requests from the same domain
+// causing an error since they are on two distinct domains (ports 3000 and 3001)
+app.use(cors());
+
 // JSON middleware
-app.use(express.json())
+app.use(express.json());
 
 
 // CRUD Operations ///////////////////////////////////////////////
@@ -97,7 +103,7 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
     //console.log(req.body);
     try {
         const results = await db.query("UPDATE restaurants SET name = $1, location = $2, price_range = $3 WHERE id = $4 RETURNING *", [req.body.name, req.body.location, req.body.price_range, req.params.id]);
-        console.log(results);
+        //console.log(results);
         res.status(200).json({
             status: "success",
             data: {
