@@ -29,10 +29,6 @@ const RestaurantList = (props) => {
         }
     }
 
-    const handleUpdate = (id) => {
-        navigate.push(`/restaurants/${id}/update`);
-    }
-
   return (
     <div className="list-group">
         <table className="table table-hover table-dark">
