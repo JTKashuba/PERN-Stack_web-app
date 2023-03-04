@@ -9,7 +9,6 @@ const AddRestaurant = () => {
     const [priceRange, setPriceRange] = useState("Price Range");
 
     const handleSubmit = async (e) => {
-        {/* default behavior in HTML is to reload page. with React we never want to reload the page so we don't lose State */}
         e.preventDefault()
         try {
             const response = await RestaurantFinder.post("/", {

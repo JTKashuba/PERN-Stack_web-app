@@ -13,8 +13,20 @@ const RestaurantList = (props) => {
                 console.log(err);
             }
         }
-        fetchData();  // now that the data has been fetched, store it in the context API 
+        fetchData(); 
     }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await RestaurantFinder.delete(`/${id}`);
+            setRestaurants(restaurants.filter(restaurant => {
+                return restaurant.id != id
+            }))
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
   return (
     <div className="list-group">
         <table className="table table-hover table-dark">
@@ -37,7 +49,7 @@ const RestaurantList = (props) => {
                         <td>{"$".repeat(restaurant.price_range)}</td>
                         <td>reviews</td>
                         <td><button className="btn btn-warning">Update</button></td>
-                        <td><button className="btn btn-danger">Delete</button></td>
+                        <td><button onClick={() => handleDelete(restaurant.id)} className="btn btn-danger">Delete</button></td>
                     </tr>);                    
                 })}
                 {/*<tr>
