@@ -19,7 +19,6 @@ const RestaurantList = (props) => {
     }, []);
 
     const handleDelete = async (e, id) => {
-{/* IMPORTANT LESSON part2: using stopPropagation on the event allows the buttons on the row to work as intended */}
         e.stopPropagation();
         try {
             const response = await RestaurantFinder.delete(`/${id}`);
@@ -32,7 +31,6 @@ const RestaurantList = (props) => {
     }
 
     const handleUpdate = (e, id) => {
-{/* IMPORTANT LESSON part2: using stopPropagation on the event allows the buttons on the row to work as intended */}
         e.stopPropagation();
         navigate(`/restaurants/${id}/update`);
     }
@@ -52,7 +50,6 @@ const RestaurantList = (props) => {
             </thead>
             <tbody>
                 {restaurants && restaurants.map((restaurant) => {
-{/* IMPORTANT LESSON part1: having an onClick handler for an entire row like this will effectively break/prevent the update/delete buttons from working */}
                     return (
                     <tr onClick={() => navigate(`/restaurants/${restaurant.id}`)} key={restaurant.id}>
                         <td>{restaurant.name}</td>
