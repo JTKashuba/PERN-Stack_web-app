@@ -28,7 +28,6 @@ const UpdateRestaurant = (props) => {
             price_range: priceRange
         });
         navigate("/");
-
     }
 
     return (

@@ -18,7 +18,9 @@ const RestaurantList = (props) => {
         fetchData(); 
     }, []);
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (e, id) => {
+{/* IMPORTANT LESSON part2: using stopPropagation on the event allows the buttons on the row to work as intended */}
+        e.stopPropagation();
         try {
             const response = await RestaurantFinder.delete(`/${id}`);
             setRestaurants(restaurants.filter(restaurant => {
@@ -27,6 +29,12 @@ const RestaurantList = (props) => {
         } catch(err) {
             console.log(err);
         }
+    }
+
+    const handleUpdate = (e, id) => {
+{/* IMPORTANT LESSON part2: using stopPropagation on the event allows the buttons on the row to work as intended */}
+        e.stopPropagation();
+        navigate(`/restaurants/${id}/update`);
     }
 
   return (
@@ -44,32 +52,17 @@ const RestaurantList = (props) => {
             </thead>
             <tbody>
                 {restaurants && restaurants.map((restaurant) => {
+{/* IMPORTANT LESSON part1: having an onClick handler for an entire row like this will effectively break/prevent the update/delete buttons from working */}
                     return (
-                    <tr key={restaurant.id}>
+                    <tr onClick={() => navigate(`/restaurants/${restaurant.id}`)} key={restaurant.id}>
                         <td>{restaurant.name}</td>
                         <td>{restaurant.location}</td>
                         <td>{"$".repeat(restaurant.price_range)}</td>
                         <td>reviews</td>
-                        <td><button onClick={() => navigate(`/restaurants/${restaurant.id}/update`)} className="btn btn-warning">Update</button></td>
-                        <td><button onClick={() => handleDelete(restaurant.id)} className="btn btn-danger">Delete</button></td>
+                        <td><button onClick={(e) => handleUpdate(e, restaurant.id)} className="btn btn-warning">Update</button></td>
+                        <td><button onClick={(e) => handleDelete(e, restaurant.id)} className="btn btn-danger">Delete</button></td>
                     </tr>);                    
                 })}
-                {/*<tr>
-                    <td>tasty thai</td>
-                    <td>eugene</td>
-                    <td>$$</td>
-                    <td>Rating</td>
-                    <td><button className="btn btn-warning">Update</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>tradewinds cafe</td>
-                    <td>eugene</td>
-                    <td>$$$</td>
-                    <td>Rating</td>
-                    <td><button className="btn btn-warning">Update</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
-                </tr> */}
             </tbody>
         </table>
     </div>
