@@ -6,15 +6,15 @@ const StarRating = ({rating}) => {
         if (i <= rating) {
             {/* star icons from https://fontawesome.com/search?q=star&o=r */}
             {/* filled-in star */}
-            stars.push(<i class="fa-solid fa-star"></i>)
+            stars.push(<i class="fa-solid fa-star text-warning"></i>)
         }
         else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
             {/* half-full star */}
-            stars.push(<i class="fa-solid fa-star-half-stroke"></i>)
+            stars.push(<i class="fa-solid fa-star-half-stroke text-warning"></i>)
         }
         else {
             {/* empty star */}
-            stars.push(<i class="fa-regular fa-star"></i>)
+            stars.push(<i class="fa-regular fa-star text-warning"></i>)
         }
     }
     return <>{stars}</>
