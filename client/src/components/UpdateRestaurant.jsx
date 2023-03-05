@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import RestaurantFinder from '../apis/RestaurantFinder';
 
 const UpdateRestaurant = (props) => {
     const {id} = useParams();
+    let navigate = useNavigate();
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [priceRange, setPriceRange] = useState("");
@@ -18,6 +19,17 @@ const UpdateRestaurant = (props) => {
         }
         fetchData();
     }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
+            name,
+            location,
+            price_range: priceRange
+        });
+        navigate("/");
+
+    }
 
     return (
         <div>
@@ -51,7 +63,7 @@ const UpdateRestaurant = (props) => {
                         className="form-control"
                         type="number" />
                 </div>
-                <button className="btn btn-primary">Submit</button>
+                <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
             </form>
         </div>);
 }
